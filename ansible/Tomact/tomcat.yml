@@ -7,7 +7,7 @@
     - default_shell: /bin/false
     - tomcat_version: 9.0.60
     - tomcat_latest: /opt/tomcat/latest
-    - tomcat_bin_directory: /opt/tomcat/latest/bin/
+    - tomcat_bin_directory: /opt/tomcat/bin
   tasks:
     - name: Update apt repo and update_cache
       ansible.builtin.apt:
