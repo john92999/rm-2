@@ -11,12 +11,12 @@ Group={{username}}
 Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
 Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
 Environment="CATALINA_BASE={{tomcat_latest}}"
-Environment="CATALINA_HOME={{tomcat_latest}}
-Environment="CATALINA_PID="{{tomcat_latest}}"/temp/tomcat.pid"
+Environment="CATALINA_HOME={{tomcat_latest}}"
+Environment="CATALINA_PID={{tomcat_latest}}/temp/tomcat.pid"
 Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
 
-ExecStart=/opt/tomcat/apache-tomcat-9.0.60/bin/startup.sh
-ExecStop="{{tomcat_latest}}"/bin/shutdown.sh
+ExecStart={{ tomcat_latest }}/bin/startup.sh
+ExecStop={{tomcat_latest}}/bin/shutdown.sh
 
 RestartSec=10
 Restart=always
