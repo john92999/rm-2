@@ -32,3 +32,10 @@
         group: "{{username}}"
         owner: "{{username}}"
         remote_src: true
+    - name: Change ownership
+      file:
+        path: "{{home_dir}}"
+        state: directory
+        recurse: true
+        group: "{{username}}"
+        owner: "{{username}}"
