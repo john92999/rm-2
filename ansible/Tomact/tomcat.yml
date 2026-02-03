@@ -5,6 +5,7 @@
     - username: tomcat
     - home_dir: /opt/tomcat
     - default_shell: /bin/false
+    - tomcat_version: 9.0.60
   tasks:
     - name: Update apt repo and update_cache
       ansible.builtin.apt:
@@ -18,3 +19,7 @@
         home: "{{home_dir}}"
         shell: "{{default_shell}}"
         name: "{{username}}"
+    - name: Download tomcat
+      get_url:
+        url: "https://dlcdn.apache.org/tomcat/tomcat-9/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        dest: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
