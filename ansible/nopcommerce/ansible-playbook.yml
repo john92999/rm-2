@@ -1,0 +1,18 @@
+- name: nopcommerce
+  become: yes
+  hosts: all
+  tasks:
+    - name: update system
+      apt:
+        - update_cache: yes
+    - name: install required files
+      apt:
+        name: { { item } }
+        state: present
+        update_cache: yes
+      loop:
+        - nginx
+        - unzip
+        - wget
+        - curl
+        - mysql-server

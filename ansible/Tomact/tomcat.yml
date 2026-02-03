@@ -10,6 +10,10 @@
     - tomcat_admin_user: devops
     - tomcat_admin_password: devops
     - tomcat_users_relative: conf/tomcat-users.xml
+    - tomcat_manager_allow_ipregex: ".*"
+    - tomcat_allow_context_locations:
+        - /opt/tomcat/apache-tomcat-9.0.60/webapps/manager/META-INF/context.xml
+        - /opt/tomcat/apache-tomcat-9.0.60/webapps/host-manager/META-INF/context.xml
   tasks:
     - name: Update apt repo and update_cache
       ansible.builtin.apt:
