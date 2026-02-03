@@ -1,0 +1,21 @@
+- name: install tomcat
+  become: yes
+  hosts: all
+  vars:
+    - username: tomcat
+    - home_dir: /opt/tomcat
+    - default_shell: /bin/false
+  tasks:
+    - name: Update apt repo and update_cache
+      ansible.builtin.apt:
+        update_cache: yes
+    - name: Install openjdk 11
+      package:
+        name: "{{java_package}}"
+        state: present
+    - name: Create tomcat user
+      user:
+        group: "{{username}}"
+        home: "{{home_dir}}"
+        shell: "{{default_shell}}"
+        name: "{{username}}"
