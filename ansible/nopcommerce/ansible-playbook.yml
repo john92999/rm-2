@@ -45,3 +45,44 @@
       loop:
         - aspnetcore-runtime-8.0
         - dotnet-sdk-8.0
+    - name: Set MySQL root password
+      community.mysql.mysql_user:
+        name: root
+        host: localhost
+        password: "RootStrongPass!"
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+    - name: Remove anonymous MySQL users
+      community.mysql.mysql_user:
+        name: ""
+        host_all: yes
+        state: absent
+        login_user: root
+        login_password: "RootStrongPass!"
+    - name: Remove test database
+      community.mysql.mysql_db:
+        name: test
+        state: absent
+        login_user: root
+        login_password: "RootStrongPass!"
+    - name: Restrict root login to localhost
+      community.mysql.mysql_user:
+        name: root
+        host: "%"
+        state: absent
+        login_user: root
+        login_password: "RootStrongPass!"
+    - name: Create nopCommerce database
+      community.mysql.mysql_db:
+        name: nopcommerce
+        state: present
+        login_user: root
+        login_password: "RootStrongPass!"
+    - name: Create nopCommerce DB user
+      community.mysql.mysql_user:
+        name: nopuser
+        password: "StrongPassword123!"
+        priv: "nopcommerce.*:ALL"
+        host: localhost
+        state: present
+        login_user: root
+        login_password: "RootStrongPass!"
