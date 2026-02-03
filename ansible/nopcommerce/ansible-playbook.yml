@@ -2,17 +2,43 @@
   become: yes
   hosts: all
   tasks:
-    - name: update system
-      apt:
-        update_cache: yes
+    - name: Initial system update
+      include_tasks: updatesystem.yml
+
     - name: install required files
       apt:
-        name: "{{item}}"
+        name: "{{ item }}"
         state: present
-        update_cache: yes
       loop:
         - nginx
         - unzip
         - wget
         - curl
         - mysql-server
+
+    - name: Enable and start the nginx and mysql service
+      systemd_service:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      loop:
+        - nginx
+        - mysql
+
+    - name: download the required .net files
+      get_url:
+        url: "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
+        dest: /tmp/packages-microsoft-prod.deb
+
+    - name: Install the downloaded Microsoft packages
+      apt:
+        deb: /tmp/packages-microsoft-prod.deb
+        state: present
+
+    - name: Update system after adding Microsoft repository
+      include_tasks: updatesystem.yml
+
+    - name: Install .NET SDK
+      apt:
+        name: dotnet-sdk-8.0
+        state: present
