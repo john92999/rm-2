@@ -6,7 +6,10 @@
     - home_dir: /opt/tomcat
     - default_shell: /bin/false
     - tomcat_version: 9.0.60
-    - tomcat_latest: /opt/tomcat/latest
+    - tomcat_latest: /opt/tomcat/apache-tomcat-9.0.60
+    - tomcat_admin_user: devops
+    - tomcat_admin_password: devops
+    - tomcat_users_relative: conf/tomcat-users.xml
   tasks:
     - name: Update apt repo and update_cache
       ansible.builtin.apt:
@@ -56,7 +59,7 @@
       loop: "{{sh_files_tomcat_bin.files}}"
     - name: copy the service file
       copy:
-        src: tomcat.service
+        src: "tomcat.service.j2"
         dest: /etc/systemd/system/tomcat.service
         owner: "{{username}}"
         group: "{{username}}"
@@ -66,3 +69,18 @@
         daemon_reload: true
         enabled: yes
         state: started
+    - name: create a tomcat users file
+      template:
+        src: "tomcat-users.xml.j2"
+        dest: "{{ tomcat_latest }}/{{ tomcat_users_relative }}"
+        owner: "{{username}}"
+        group: "{{username}}"
+      notify:
+        - reload the daemon, enable and start the tomcat service
+  handlers:
+    - name: reload the daemon, enable and start the tomcat service
+      systemd_service:
+        name: "tomcat.service"
+        daemon_reload: yes
+        enabled: yes
+        state: restarted
