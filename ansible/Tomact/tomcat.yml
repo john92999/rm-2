@@ -59,7 +59,7 @@
         src: tomcat.service
         dest: /etc/systemd/system/tomcat.service
         owner: "{{username}}"
-        group: "{{userame}}"
+        group: "{{username}}"
     - name: Reload the daemon and start the tomcat service
       systemd:
         name: "tomcat.service"
