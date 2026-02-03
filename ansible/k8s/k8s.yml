@@ -1,0 +1,8 @@
+---
+- name: k8s
+  become: yes
+  hosts: all
+  tasks:
+    - name: System Update
+      ansible.builtin.apt:
+        update_cache: yes
