@@ -4,7 +4,7 @@
   tasks:
     - name: update system
       apt:
-        - update_cache: yes
+        update_cache: yes
     - name: install required files
       apt:
         name: "{{item}}"
