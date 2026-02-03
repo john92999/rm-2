@@ -40,5 +40,8 @@
 
     - name: Install .NET SDK
       apt:
-        name: dotnet-sdk-8.0
+        name: "{{item}}"
         state: present
+      loop:
+        - aspnetcore-runtime-8.0
+        - dotnet-sdk-8.0
