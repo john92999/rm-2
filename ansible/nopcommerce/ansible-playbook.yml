@@ -7,7 +7,7 @@
         - update_cache: yes
     - name: install required files
       apt:
-        name: { { item } }
+        name: "{{item}}"
         state: present
         update_cache: yes
       loop:
