@@ -63,6 +63,8 @@
         dest: /etc/systemd/system/tomcat.service
         owner: "{{username}}"
         group: "{{username}}"
+    - name: Force all notified handlers to run at this point, not waiting for normal sync points
+      meta: flush_handlers
     - name: Reload the daemon and start the tomcat service
       systemd_service:
         name: "tomcat.service"
