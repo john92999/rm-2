@@ -1,0 +1,11 @@
+- name: Install Java
+  become: yes
+  hosts: all
+  tasks:
+    - name: Install Java
+      ansible.builtin.apt:
+        name: openjdk-11-jdk
+        state: present
+        update_cache: yes
+    - name: Verify Java installation
+      ansible.builtin.command: java -version
