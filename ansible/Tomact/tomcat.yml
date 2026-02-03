@@ -15,7 +15,6 @@
         state: present
     - name: Create tomcat user
       user:
-        group: "{{username}}"
         home: "{{home_dir}}"
         shell: "{{default_shell}}"
         name: "{{username}}"
