@@ -61,8 +61,8 @@
         owner: "{{username}}"
         group: "{{username}}"
     - name: Reload the daemon and start the tomcat service
-      systemd:
+      systemd_service:
         name: "tomcat.service"
-        daemon_reload: yes
-        enable: yes
+        daemon_reload: true
+        enabled: yes
         state: started
