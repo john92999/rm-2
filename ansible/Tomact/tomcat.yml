@@ -41,7 +41,7 @@
         owner: "{{username}}"
     - name: find all the .sh files in the tomcat bin directory
       ansible.builtin.find:
-        paths: /opt/tomcat/apache-tomcat-"{{version}}"/bin
+        paths: /opt/tomcat/apache-tomcat-"{{tomcat_version}}"/bin
         patterns: "*.sh"
       register: sh_files_tomcat_bin
     - name: print the files from the previous
