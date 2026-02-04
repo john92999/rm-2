@@ -86,3 +86,4 @@
         state: present
         login_user: root
         login_password: "RootStrongPass!"
+    - name: "Install 2nd packages"
