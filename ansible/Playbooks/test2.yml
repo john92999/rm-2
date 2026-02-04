@@ -1,8 +1,0 @@
-- name: Install Java
-  become: yes
-  hosts: all
-  tasks:
-    - name: Install Java omn Ubuntu
-      ansible.builtin.apt:
-        name: openjdk-11-jdk
-      when: ansible_facts['os_family'] == "Debian"

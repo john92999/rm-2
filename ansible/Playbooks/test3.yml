@@ -1,8 +1,0 @@
-- name: Install Java
-  hosts: all
-  become: yes
-  tasks:
-    - name: Install Java package
-      package:
-        name: "{{ java_package }}"
-        state: present
